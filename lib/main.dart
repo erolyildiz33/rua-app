@@ -1,3 +1,4 @@
+//import 'dart:html';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -29,7 +30,7 @@ class YoutubeChannelState extends State<YoutubeChannel> {
   void initState() {
     super.initState();
     // Enable virtual display.
-    if (Platform.isAndroid) WebView.platform = AndroidWebView();
+    // if (Platform.isAndroid) WebView.platform = AndroidWebView();
   }
 
   WebViewController? _webViewController;
@@ -38,10 +39,23 @@ class YoutubeChannelState extends State<YoutubeChannel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: NavDrawer(),
         appBar: AppBar(
-          backgroundColor: Colors.teal,
-          title: const Text('Rua Tekstil'),
-        ),
+            backgroundColor: Colors.teal,
+            title: const Text('Rua Tekstil'),
+            actions: <Widget>[
+              PopupMenuButton<String>(
+                onSelected: null,
+                itemBuilder: (BuildContext context) {
+                  return Constants.choices.map((String choice) {
+                    return PopupMenuItem<String>(
+                      value: choice,
+                      child: Text(choice),
+                    );
+                  }).toList();
+                },
+              )
+            ]),
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
@@ -99,5 +113,72 @@ class YoutubeChannelState extends State<YoutubeChannel> {
         ));
   }
 
+  void choiceAction(String choice) {
+    if (choice == Constants.SignOut) {
+      print('SignOut');
+    }
+  }
+
   int get bottomnavbar => 0;
+}
+
+class Constants {
+  static const String fund = 'Fund';
+//  static const String Settings = 'Settings';
+  static const String SignOut = 'Sign out';
+
+  static const List<String> choices = <String>[
+    fund,
+    'enter code here',
+    SignOut
+  ];
+}
+
+class NavDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Text(
+              'Side menu',
+              style: TextStyle(color: Colors.white, fontSize: 25),
+            ),
+            decoration: BoxDecoration(
+                color: Colors.green,
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage('assets/images/cover.jpg'))),
+          ),
+          ListTile(
+            leading: Icon(Icons.input),
+            title: Text('Welcome'),
+            onTap: () => {},
+          ),
+          ListTile(
+            leading: Icon(Icons.verified_user),
+            title: Text('Profile'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Settings'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: Icon(Icons.border_color),
+            title: Text('Feedback'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Logout'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+        ],
+      ),
+    );
+  }
 }
