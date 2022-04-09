@@ -1,5 +1,6 @@
 //import 'dart:html';
-import 'dart:io';
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -125,6 +126,7 @@ class YoutubeChannelState extends State<YoutubeChannel> {
 class Constants {
   static const String fund = 'Fund';
 //  static const String Settings = 'Settings';
+  // ignore: constant_identifier_names
   static const String SignOut = 'Sign out';
 
   static const List<String> choices = <String>[
@@ -134,6 +136,7 @@ class Constants {
   ];
 }
 
+// ignore: use_key_in_widget_constructors
 class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -141,7 +144,7 @@ class NavDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
+          const DrawerHeader(
             child: Text(
               'Side menu',
               style: TextStyle(color: Colors.white, fontSize: 25),
@@ -153,28 +156,28 @@ class NavDrawer extends StatelessWidget {
                     image: AssetImage('assets/images/cover.jpg'))),
           ),
           ListTile(
-            leading: Icon(Icons.input),
-            title: Text('Welcome'),
+            leading: const Icon(Icons.input),
+            title: const Text('Welcome'),
             onTap: () => {},
           ),
           ListTile(
-            leading: Icon(Icons.verified_user),
-            title: Text('Profile'),
+            leading: const Icon(Icons.verified_user),
+            title: const Text('Profile'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
+            leading: const Icon(Icons.settings),
+            title: const Text('Settings'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.border_color),
-            title: Text('Feedback'),
+            leading: const Icon(Icons.border_color),
+            title: const Text('Feedback'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
+            leading: const Icon(Icons.exit_to_app),
+            title: const Text('Logout'),
             onTap: () => {Navigator.of(context).pop()},
           ),
         ],
